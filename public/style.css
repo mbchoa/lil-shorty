@@ -28,15 +28,17 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 24px;
   width: 100%;
 }
 
 .header {
   align-self: center;
+  font-size: 90%;
+  max-width: 90%;
 }
 
 .content {
+  max-width: 260px;
   width: 100%;
 }
 
@@ -45,24 +47,15 @@ a {
   flex-direction: column;
 }
 
-@media screen and (min-width: 600px) {
-  input {
-    width: 260px;
-  }
+.shortened-link {
+  text-align: center;
+}
 
-  .center {
-    flex-direction: row;
-    padding: 0;
-    width: initial;
-  }
-
-  .header {
-    align-self: flex-start;
-    padding-top: 12px;
-  }
-
-  .content {
-    margin-left: 56px;
-    width: initial;
-  }
+.error {
+  border: 1px solid red;
+  border-left-width: 8px;
+  color: red;
+  font-size: 14px;
+  border-radius: 4px;
+  padding: 8px 16px;
 }

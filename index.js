@@ -1,4 +1,3 @@
-const cors = require('fastify-cors');
 const env = require('env-schema');
 const fastify = require('fastify');
 const helmet = require('fastify-helmet');
@@ -36,19 +35,22 @@ app.register(helmet, {
     directives: {
       'default-src': ["'self'"],
       'img-src': ["'self'", 'data:'],
-      'script-src': ["'self'", 'https://cdn.jsdelivr.net'],
+      'script-src': ["'self'", "'unsafe-eval'", 'https://cdn.jsdelivr.net'],
       'style-src': ["'self'", 'https://cdnjs.cloudflare.com'],
     },
   },
 });
 
-app.register(cors);
 app.register(static, {
   root: path.join(__dirname, 'public'),
   prefix: '/public/',
 });
 
 // Routes
+app.get('/', (_, reply) => {
+  reply.sendFile('index.html');
+});
+
 app.get('/:slug', async (request, reply) => {
   try {
     const url = await urls.findOne({ slug: request.params.slug });
@@ -62,9 +64,30 @@ app.get('/:slug', async (request, reply) => {
   }
 });
 
-app.post('/create', async (request, reply) => {
+const createSchema = {
+  body: {
+    type: 'object',
+    properties: {
+      slug: { type: 'string' },
+      url: { type: 'string' },
+    },
+    required: ['url'],
+  },
+  headers: {
+    type: 'object',
+    properties: {
+      'content-type': { type: 'string' },
+    },
+    required: ['content-type'],
+  },
+};
+
+app.post('/create', { schema: createSchema }, async (request, reply) => {
   let { slug, url } = request.body;
 
+  if (!url) {
+    return reply.status(400).send({ message: 'Missing URL', statusCode: 400 });
+  }
   if (!slug) {
     slug = nanoid(8);
   } else {

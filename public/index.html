@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    <link rel="stylesheet" href="/public/normalize.min.css">
+    <link rel="stylesheet" href="/public/skeleton.min.css">
+    <link rel="stylesheet" href="/public/style.css">
+    <title>shorty — Another URL shortener</title>
+  </head>
+  <body>
+    <div class="center">
+      <header class="header">
+        <h1 class="heading"><a href="/">shorty</a></h1>
+      </header>
+      <main class="content">
+        <form class="form">
+          <input type="text" placeholder="URL" />
+          <input type="text" placeholder="Slug" />
+          <button class="button-primary" type="submit">Generate</button>
+        </form>
+      </main>
+      <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.min.js"></script>
+      <script src="/public/app.js"></script>
+    </div>
+  </body>
+</html>

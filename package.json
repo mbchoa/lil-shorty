@@ -15,11 +15,18 @@
     }
   },
   "scripts": {
-    "dev": "NODE_ENV=development nodemon index.js"
+    "dev": "NODE_ENV=development nodemon index.js",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": "12.x"
+  },
+  "repository": {
+    "url": "https://github.com/mbchoa/lil-shorty"
+  },
   "dependencies": {
     "env-schema": "^1.1.0",
     "fastify": "^3.2.0",
